@@ -1,0 +1,20 @@
+INCLUDE Irvine32.inc
+.data
+var4 dword ?
+var1 dword 3
+var2 dword 5
+.code
+main PROC
+mov eax, var2
+sub eax, 3
+mov ebx, eax
+mov eax, var1
+mov edx, 5
+mul edx 
+mov ecx, ebx
+div ecx
+call writedec
+call crlf
+exit
+main ENDP
+END main

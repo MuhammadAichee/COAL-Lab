@@ -1,0 +1,18 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+extern "C"
+{
+	voif print(int);
+	void fibonacci();
+}
+void print(int d)
+{	
+	cout<<d<<"    ";
+}
+int main()
+{	
+	fibonacci();
+	return 0;
+}

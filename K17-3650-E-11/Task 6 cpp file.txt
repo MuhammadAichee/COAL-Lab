@@ -1,0 +1,48 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+extern "C"
+{
+	void call();
+	void sort(int array[],int size);
+}
+void sort(int array[], int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size - 1; j++)
+		{
+			if (array[j]>array[j + 1])
+				swap(array[j], array[j + 1]);
+		}
+	}
+	for (int i = 0; i < size; i++)
+		cout << array[i] << " ";
+	cout << endl;
+}
+int main()
+{
+	call();
+	return 0;
+}
+
+
+
+
+.686
+.MODEL FLAT, C
+.STACK 2048
+
+
+sort PROTO C, array:DWORD,len:DWORD
+
+.data
+	array DWORD 31, 26, 21, 3, 5, 10, 80, 64, 7 ,44
+	l = LENGTHOF array 
+.code
+call PROC
+	invoke sort,OFFSET arr,l
+ret
+sort ENDP
+END

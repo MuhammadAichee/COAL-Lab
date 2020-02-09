@@ -1,0 +1,88 @@
+INCLUDE Irvine32.inc
+.data
+super_module BYTE ?
+module1 BYTE ?
+module2 BYTE ?
+sub_module1 BYTE ?
+sub_module2 BYTE ?
+sub_module3 BYTE ?
+final BYTE 'Final Status', 0
+msg BYTE '    ',0
+msg1 BYTE 'Enter status of super module',0
+msg2 BYTE 'Enter status of sub module 1',0
+msg3 BYTE 'Enter status of sub module 2',0
+.code
+main proc
+mov eax, 0
+mov edx, OFFSET msg1
+call WriteString
+call crlf
+call readint
+mov super_module, al
+CMP super_module, 0
+JE F
+mov eax, 0
+mov edx, OFFSET msg2
+call WriteString
+call crlf
+call readint
+mov module1, al
+mov eax, 0
+mov edx, OFFSET msg3
+call WriteString
+call crlf
+call readint
+mov module2, al
+CMP super_module,1
+JE A
+F: mov al, 1
+mov module1, al
+mov module2, al
+mov sub_module1, al
+mov sub_module3, al
+mov sub_module2, al
+JMP D
+A: CMP module1, 1
+JE B
+CMP module2, 1
+JE B
+B: mov bl,0
+mov sub_module1, bl
+mov sub_module3, bl
+mov bl,1
+mov sub_module2, bl
+JMP D
+mov bl, 1
+mov module1, bl
+mov module2, bl
+mov sub_module1, bl
+mov sub_module2, bl
+mov sub_module3, bl
+D: 
+	mov edx, OFFSET final
+	call WriteString
+	call crlf
+	mov al, super_module
+	call WriteDec
+	call crlf
+	mov al, module1
+	call WriteDec
+	mov edx, OFFSET msg
+	call WriteString
+	mov al, module2
+	call WriteDec
+	call crlf
+	mov al, sub_module1
+	call WriteDec
+	mov edx, OFFSET msg
+	call WriteString
+	mov al, sub_module2
+	call WriteDec
+	mov edx, OFFSET msg
+	call WriteString
+	mov al, sub_module3
+	call WriteDec
+	call crlf
+exit
+main ENDP
+END main

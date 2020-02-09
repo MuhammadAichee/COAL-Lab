@@ -1,0 +1,14 @@
+INCLUDE Irvine32.inc
+.data
+x SBYTE -128
+.code
+main PROC
+mov eax,0
+movsx ax,x
+rol eax,16
+sar eax,16
+call Writeint
+call crlf
+exit
+main ENDP
+END main

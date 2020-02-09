@@ -1,0 +1,29 @@
+TITLE Lab
+INCLUDE Irvine32.inc
+
+.data
+arr BYTE 1, 2, 3, 4, 5
+msg BYTE "Hello World", 0
+
+.code
+main PROC
+mov esi, OFFSET arr
+mov ecx, LENGTHOF arr
+mov eax, 0 
+
+outer:
+mov ebx, ecx
+mov ecx, 10
+mov edx, OFFSET msg
+mov al, [esi]
+call WriteDec
+	inner:
+		call WriteString
+	loop inner
+inc esi
+mov ecx, ebx
+loop outer
+
+exit
+main ENDP
+END main

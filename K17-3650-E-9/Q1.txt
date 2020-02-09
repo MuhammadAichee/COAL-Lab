@@ -1,0 +1,28 @@
+INCLUDE Irvine32.inc
+.data
+A1 DWORD 2
+A2 DWORD 3
+A3 DWORD 4
+.code
+ThreeProd PROC,
+V1: DWORD, V2: DWORD, V3: DWORD
+MOV EAX, V1
+MOV EBX, V2
+MUL EBX
+MOV EBX, V3
+MUL EBX
+CALL WRITEDEC
+CALL CRLF
+ret
+ThreeProd ENDP
+
+main PROC
+
+PUSH A3
+PUSH A2
+PUSH A1
+CALL ThreeProd
+
+exit
+main ENDP
+END main

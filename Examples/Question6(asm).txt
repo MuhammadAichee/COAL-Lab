@@ -1,0 +1,49 @@
+.686
+.MODEL FLAT,C
+.STACK 2048
+
+takeinput PROTO C
+showoutput PROTO C,par:DWORD
+.data
+arr DWORD 10DUP(?)
+
+.code
+asmproc PROC
+
+mov esi,0
+mov ecx,Lengthof arr
+L1:
+	invoke takeinput
+	mov arr[esi],eax
+	inc esi
+	LOOP L1
+
+mov esi,0
+L2:
+	PUSH ecx
+	mov ecx,Lengthof arr
+	L3:
+		mov eax,[arr+esi]
+		cmp eax,[arr+esi+4]
+		JB _swap
+	L:	add esi,4
+	LOOP L3
+	POP ecx
+	LOOP L2
+JMP _exit
+
+_swap:
+	mov ebx,[arr+esi+4]
+	mov [arr+esi],ebx
+	mov [arr+esi+4],eax
+	JMP L
+
+_exit:
+	mov esi,0
+	L4:
+		invoke showoutput,arr[esi]
+		inc esi
+	LOOP L4
+ret 
+asmproc ENDP
+END

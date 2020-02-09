@@ -1,0 +1,68 @@
+INCLUDE Irvine32.inc
+.data
+array DWORD ?,?,?,?,20,5,3,54,235,369,1,2,36,54,25,22,12,15,80,23
+msg BYTE 'Enter Values',0
+space BYTE '      ',0
+CC DWORD 0
+CN DWORD 0
+.code
+main proc
+mov esi,4
+mov ecx, LENGTHOF array - 4
+L2:
+	mov eax, array[esi*TYPE array]	
+	CMP eax, 3
+	JB A
+	CMP eax, 233
+	JA B
+	JMP Z
+A:	INC CC
+	JMP Z
+B:	INC CN
+Z:  INC esi
+LOOP L2
+
+mov esi,4
+mov ecx, LENGTHOF array - 5
+mov eax, array[esi*TYPE array]
+INC esi
+L3:
+	CMP eax, array[esi*TYPE array]
+	JB D
+	JMP E
+D:	mov eax, array[esi*TYPE array]
+E:	INC esi
+LOOP L3
+mov array[2*TYPE array],eax
+mov esi,4
+mov ecx, LENGTHOF array - 4
+mov eax, array[esi*TYPE array]
+;call Writedec
+;call crlf
+INC esi
+L4:
+	CMP eax, array[esi*TYPE array]
+	JA F
+	JMP G
+F:	mov eax, array[esi*TYPE array]
+G:  INC esi	
+LOOP L4
+mov array[3*TYPE array], eax
+mov eax, CC
+mov array[0*TYPE array], eax
+mov eax, CN
+mov array[1*TYPE array], eax
+mov ecx, LENGTHOF array
+mov esi, 0
+L5:
+	mov eax, array[esi*TYPE array]
+	call WriteDec
+	INC esi
+	call CRLF
+	;mov edx, LENGTHOF space
+	;call WriteString
+Loop L5
+
+exit
+main ENDP
+END main

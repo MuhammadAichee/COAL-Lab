@@ -1,0 +1,57 @@
+TITLE LAB_05
+INCLUDE Irvine32.inc
+
+.data
+	msg BYTE "Enter The Index (row,col) : ",0
+	msg1 BYTE "Random Value : ",0
+	msg3 BYTE "WIN",0
+	msg4 BYTE "LOOSE",0
+	twoD WORD	12,4,9,15,88
+	sizeR	  =	($-twoD)/2
+		WORD	51,102,512,63,142
+		WORD	78,119,214,58,73
+		WORD	176,192,200,18,50
+		WORD	63,154,188,190,102
+.code
+main PROC
+	
+	mov ecx,3
+l1:
+	mov ebx,sizeR
+	mov esi,OFFSET twoD
+	mov edx,OFFSET msg
+	call writestring
+	call readdec
+	mul ebx
+	mov ebx,2
+	mul ebx
+	add esi,eax
+	call readdec
+	mul ebx
+	add esi,eax
+	
+	mov edx,OFFSET msg1
+	call writestring
+	mov eax,1000
+	call Randomize
+	call RandomRange
+	call writedec
+	call crlf
+	mov ebx,0
+	mov bx,[esi]
+	cmp ax,bx
+	je exit1
+
+loop l1
+jmp exit2
+exit1:
+	mov edx,OFFSET msg3
+jmp exit3
+exit2:
+	mov edx,OFFSET msg4
+exit3:
+	call writestring
+	call crlf
+exit
+main ENDP
+END main

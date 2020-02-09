@@ -1,0 +1,62 @@
+INCLUDE irvine32.INC
+.data
+swap_count byte 0
+msg byte "Count Swap = :",0
+array BYTE 15, 10, 25, 20, 30
+.code
+main PROC
+mov eax,0
+mov edx,0
+mov esi,0
+mov ecx,lengthof array
+dec ecx
+l1:
+mov ebx,0
+mov edx,ecx
+mov ecx,lengthof array
+dec cx
+l2:
+mov al,array[esi*TYPE array]
+inc esi
+cmp array[esi*TYPE array],al
+jge D
+call swap
+
+D:
+LOOP l2
+cmp ebx,0
+je ei
+mov esi,0
+mov ecx,edx
+loop l1
+ei:
+mov eax,0
+mov ecx,lengthof array
+mov esi,0
+l3:
+mov al,array[esi*TYPE array]
+inc esi
+call WriteDec
+call crlf
+loop l3
+call crlf
+mov edx,offset msg
+call WriteString
+mov eax,0
+mov al,swap_count
+call WriteDec
+call crlf
+exit
+main ENDP
+
+swap PROC
+xchg array[esi*TYPE array],al
+inc swap_count
+mov ebx,1
+dec esi
+mov array[esi*TYPE  array],al
+inc esi
+ret
+swap ENDP
+END main
+ 

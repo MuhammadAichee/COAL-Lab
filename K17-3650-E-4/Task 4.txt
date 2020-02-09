@@ -1,0 +1,50 @@
+include irvine32.INC
+.data
+a dword ?
+b dword ?
+c dword ?
+d dword ?
+
+count byte 0
+msg1 byte "Numbers Are Equal",0
+msg2 byte "Numbers Aren't Equal",0
+.code
+
+main PROC
+call readint
+mov a,eax
+call readint
+mov b,eax
+call readint
+mov c,eax
+call readint
+mov d,eax
+cmp eax,c
+je A
+jmp ex
+
+A:
+mov eax,c
+cmp eax,b
+je B
+jmp ex
+
+B:
+mov eax,b
+cmp eax,a
+je Z
+jmp F
+
+Z:
+mov edx,offset msg1
+call writestring
+call crlf
+exit
+
+
+F:
+mov edx,offset msg2
+call writestring
+exit
+main ENDP
+end main

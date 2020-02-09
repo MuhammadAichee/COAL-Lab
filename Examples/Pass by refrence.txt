@@ -1,0 +1,30 @@
+INCLUDE Irvine32.inc
+.data
+arr DWORD 1,2,3,4,5
+.code
+myproc PROC,
+lengtharr: DWORD, address: DWORD
+mov ecx, 0
+mov ecx, lengtharr
+mov esi, 0
+mov esi, address
+L1:
+	mov eax, 0
+	mov eax, [esi]
+	call WriteDec
+	call crlf
+	add esi,4
+Loop L1
+ret
+myproc ENDP
+
+
+main PROC
+push OFFSET arr
+push DWORD PTR LENGTHOF arr
+call myproc
+
+
+exit
+main ENDP
+END main

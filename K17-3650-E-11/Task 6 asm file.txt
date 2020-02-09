@@ -1,0 +1,111 @@
+#include "stdafx.h"
+#include<iostream>
+using namespace std;
+
+extern "C"
+{
+	void unsorted();
+	void call();
+	int Input();
+	void print(int);
+	void sort();
+}
+
+int main()
+
+{
+	call();
+	return 0;
+}
+
+int Input()
+{
+	int a;
+	cout<<"Enter number "<<endl;
+	cin>>a;
+	return a;
+}
+
+void unsorted()
+{
+	cout << endl << "initial array!! " <<endl;
+}
+void sort()
+{
+	cout << endl << "Sorted array!! " <<endl;
+}
+
+void print(int value)
+{
+	cout<<value<<endl;
+}
+
+
+
+
+.686
+.model flat, C
+.stack 2048
+
+
+Input PROTO C
+unsorted PROTO C
+sort PROTO C
+print PROTO C, v:DWORD
+
+.data
+array dword 31, 26, 21, 3, 5, 10, 80, 64, 7 ,44
+val dword ?
+.code 
+
+call proc
+
+invoke unsorted
+mov edi,0
+mov edi,offset arr
+mov ecx,10
+l2:
+push ecx
+	mov eax,[edi]
+	mov val,eax
+	invoke display,val
+	add edi,4
+	pop ecx
+loop l2
+
+mov esi,0
+mov esi, offset arr
+mov ecx,9
+
+l1:
+push ecx
+mov ecx, 9
+mov esi, offset arr
+l0:
+mov eax,[esi]
+cmp [esi+4],eax
+jge l3
+xchg eax,[esi+4]
+mov [esi],eax
+l3:
+add esi,4
+loop l0
+
+pop ecx
+loop l1
+
+invoke sort
+mov edi,offset arr
+mov ecx,10
+l9:
+push ecx
+	mov eax,[edi]
+	mov val,eax
+	invoke display,val
+	add edi,4
+	pop ecx
+loop l9
+ret
+myProc endp
+
+end

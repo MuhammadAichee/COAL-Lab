@@ -1,0 +1,27 @@
+INCLUDE Irvine32.inc
+.data
+array1 BYTE 'Hello',0
+array2 BYTE 'World',0
+.code
+Reverse_string proc
+std
+rep MOVSB
+;mov edx,ebx
+call WriteString
+call crlf
+ret
+Reverse_string ENDP
+
+
+main PROC
+LEA esi, OFFSET array1
+add esi, LENGTHOF array1
+dec esi
+LEA edx, array2
+;LEA edi, array2
+mov ecx, LENGTHOF array1
+call Reverse_string
+
+
+main ENDP
+END main

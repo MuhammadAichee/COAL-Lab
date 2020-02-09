@@ -1,0 +1,33 @@
+.686
+.MODEL FLAT, C
+.STACK 2048
+print PROTO C, par: DWORD
+.data
+a DWORD 0
+b DWORD 1
+d DWORD ?
+
+.code
+main PROC
+mov eax, a
+call writedec
+call crlf
+mov eax, a
+	add eax ,b
+	mov d, eax
+	invoke print, d
+mov ecx, 10
+L1:
+	mov eax, a
+	add eax ,b
+	mov d, eax
+	invoke print, d
+	mov eax, b
+	mov a, eax
+	mov eax, d
+	mov b, eax
+LOOP L1
+exit
+main ENDP
+END main
+

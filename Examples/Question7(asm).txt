@@ -1,0 +1,25 @@
+.686
+.MODEL FLAT,C
+.STACK 2048
+
+takeinput PROTO C
+showoutput PROTO C,par:DWORD
+.data
+var DWORD ?
+
+.code
+asmproc PROC
+invoke takeinput
+mov var,eax
+mov ecx,eax
+
+L1:
+mov ebx,var
+sub ebx,1
+MUL ebx
+Loop L1
+mov var,eax
+invoke showoutput,var
+ret 
+asmproc ENDP
+END

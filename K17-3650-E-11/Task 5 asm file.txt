@@ -1,0 +1,40 @@
+.686
+.MODEL FLAT, C
+.STACK 2048
+
+Input PROTO C
+print PROTO C, par:DWORD
+
+.data
+large DWORD
+.code
+largest PROC
+invoke Input
+mov large, eax
+invoke Input
+mov ebx, eax
+invoke Input
+mov edx, eax
+CMP large, ebx
+JB A
+JMP E
+A: mov large, ebx
+   CMP large, edx
+   JB B
+   JMP D
+B: 	mov large, edx
+	invoke print,large
+	JMP H
+D:	invoke print,large
+	JMP H
+E:	CMP large, edx
+	JB F
+	JMP G
+F:	mov large,edx
+	invoke print, large
+	JMP H
+G:	invoke print, large
+H:
+ret
+smallest ENDP
+END

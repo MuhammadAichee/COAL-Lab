@@ -1,0 +1,36 @@
+INCLUDE Irvine32.inc
+.data
+
+array BYTE '127&j~3#^&*#*#45^',0 
+msg1 BYTE 'Value Found',0
+msg2 BYTE 'Value not found',0
+.code
+main PROC
+LEA edi, array
+mov al,'A'
+mov ecx,LENGTHOF array
+LEA edx, msg1
+LEA ebx,msg2
+call Search_string
+
+
+main ENDP
+Search_string proc
+cld
+repne SCASB
+dec edi
+mov eax,LENGTHOF array
+sub eax,ecx
+CMP eax, 0
+JZ B
+call WriteString
+call crlf
+JMP A
+B: mov edx,ebx
+call WriteString
+call writedec
+call crlf
+A:
+;A:ret
+Search_string ENDP
+END main

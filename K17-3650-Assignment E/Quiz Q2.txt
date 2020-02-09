@@ -1,0 +1,122 @@
+INCLUDE Irvine32.inc
+.data
+array BYTE 9 dup(?)
+
+.code
+main PROC
+mov ecx, 9
+mov esi,0
+L1:
+	call readint
+	mov array[esi], al
+	inc esi
+Loop L1
+
+mov bl,0
+mov bl, array[0]
+add bl, 1
+CMP array[1], bl
+JE A
+mov bl, array[1]
+add bl, 1
+CMP array[2], bl
+JE A
+mov bl, array[0]
+add bl, 1
+CMP array[3], bl
+JE A
+mov bl, array[1]
+add bl, 1
+CMP array[4], bl
+JE A
+mov bl, array[2]
+add bl, 1
+CMP array[5], bl
+JE A
+mov bl, array[3]
+add bl, 1
+CMP array[6], bl
+JE A
+mov bl, array[4]
+add bl, 1
+CMP array[7], bl
+JE A
+mov bl, array[5]
+add bl, 1
+CMP array[8], bl
+JE A
+mov bl, array[3]
+add bl, 1
+CMP array[4], bl
+JE A
+mov bl, array[4]
+add bl, 1
+CMP array[5], bl
+JE A
+mov bl, array[6]
+add bl, 1
+CMP array[7], bl
+JE A
+mov bl, array[7]
+add bl, 1
+CMP array[8], bl
+JE A
+
+
+mov bl, array[0]
+sub bl, 1
+CMP array[1], bl
+JE A
+mov bl, array[1]
+sub bl, 1
+CMP array[2], bl
+JE A
+mov bl, array[0]
+sub bl, 1
+CMP array[3], bl
+JE A
+mov bl, array[1]
+sub bl, 1
+CMP array[4], bl
+JE A
+mov bl, array[2]
+sub bl, 1
+CMP array[5], bl
+JE A
+mov bl, array[3]
+sub bl, 1
+CMP array[6], bl
+JE A
+mov bl, array[4]
+sub bl, 1
+CMP array[7], bl
+JE A
+mov bl, array[5]
+sub bl, 1
+CMP array[8], bl
+JE A
+mov bl, array[3]
+sub bl, 1
+CMP array[4], bl
+JE A
+mov bl, array[4]
+sub bl, 1
+CMP array[5], bl
+JE A
+mov bl, array[6]
+sub bl, 1
+CMP array[7], bl
+JE A
+mov bl, array[7]
+sub bl, 1
+CMP array[8], bl
+JE A
+mov eax, 1
+call WriteDec
+call crlf
+
+
+
+A: exit
+main ENDP
+END main

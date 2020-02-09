@@ -1,0 +1,55 @@
+INCLUDE Irvine32.inc
+.data
+A DWORD ?
+B DWORD ?
+F DWORD ?
+D DWORD ?
+
+.code
+isprime PROC
+LOCAL E: DWORD
+push ebp
+mov E, 0
+mov edx, 0 
+mov eax, [EBP+8]
+mov esi, 2 ; num divide by 2 k lye
+div esi
+mov ebx, 2 ;for value of i 
+mov ecx, eax
+mov eax, [EBP+8] 
+L1:
+	div ebx
+	CMP edx, 0
+	JE P
+	;JMP K
+	JMP Z
+	Z: mov ecx, 0
+		mov E,1 
+		JMP Q
+	P: ADD ebx, 1
+Q: LOOP L1
+CMP E, 0
+JE N
+N: mov eax, 1
+call writedec	 	
+
+ret
+isprime ENDP
+
+main PROC
+call readint
+mov A, eax
+call readint
+mov B, eax
+call readint
+mov F, eax
+call readint
+mov D, eax
+push D
+push F
+push B
+push A
+call isprime
+exit
+main ENDP
+END main

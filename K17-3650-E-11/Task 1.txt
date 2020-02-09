@@ -1,0 +1,18 @@
+#include "stdafx.h"
+#include<iostream>
+using namespace std;
+int _tmain(int argc, _TCHAR* argv[])
+{
+	int num1, num2, num3;
+	cout<<"Enter numbers: ";
+	cin>>num1>>num2;
+	__asm
+	{
+		mov eax, num1
+		mov ebx, num2
+		AND eax, ebx
+		mov num3, eax
+	}
+	cout<<num3<<endl;
+}
+

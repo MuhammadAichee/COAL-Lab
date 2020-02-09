@@ -1,0 +1,21 @@
+.686
+.MODEL FLAT,C
+.STACK 2048
+print PROTO C, par: DWORD
+.data
+sum DWORD 1
+.code
+fact PROC
+mov ecx, 10
+mov esi, 1
+L1:
+		mov eax,sum
+		mul esi
+		mov sum, eax
+		invoke print, sum		
+		inc esi
+LOOP L1
+ret
+fact ENDP
+END
+

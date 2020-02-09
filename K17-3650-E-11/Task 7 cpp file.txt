@@ -1,0 +1,17 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+extern "C"
+{
+	void fact();
+	void print(int);
+}
+void print(int f)
+{
+	cout<<f<<"   ";
+}
+int main()
+{
+	fact();
+	return 0;
+}

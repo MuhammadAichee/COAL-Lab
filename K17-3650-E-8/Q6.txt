@@ -1,0 +1,97 @@
+INCLUDE Irvine32.inc
+.data
+m dword ?
+.code
+main PROC
+call readint
+mov m, eax
+cmp m,90
+JAE A
+cmp m,89
+JBE B
+B: 
+CMP m, 79
+JA Y
+Y:	mov eax, 'B'
+	call writechar
+	call crlf
+	JMP Z
+cmp m, 80
+JB D
+D: cmp m, 70
+JAE E
+E:	mov eax, 'C'
+	call writechar
+	call crlf
+	jmp Z
+cmp m,70
+JB F
+F:	cmp m, 60
+	JAE G
+G:	mov eax, 'D'
+	call writechar
+	call crlf
+	jmp Z
+cmp m, 60
+JB H
+H:	mov eax, 'F'
+	call writechar
+	call crlf
+	jmp Z
+A: mov eax, 'A'
+call writechar
+call crlf
+JMP Z
+
+
+Z: exit
+main ENDP
+END mainINCLUDE Irvine32.inc
+.data
+m dword ?
+.code
+main PROC
+call readint
+mov m, eax
+cmp m,90
+JAE A
+cmp m,89
+JBE B
+B: 
+CMP m, 79
+JA Y
+Y:	mov eax, 'B'
+	call writechar
+	call crlf
+	JMP Z
+cmp m, 80
+JB D
+D: cmp m, 70
+JAE E
+E:	mov eax, 'C'
+	call writechar
+	call crlf
+	jmp Z
+cmp m,70
+JB F
+F:	cmp m, 60
+	JAE G
+G:	mov eax, 'D'
+	call writechar
+	call crlf
+	jmp Z
+cmp m, 60
+JB H
+H:	mov eax, 'F'
+	call writechar
+	call crlf
+	jmp Z
+A: mov eax, 'A'
+call writechar
+call crlf
+JMP Z
+
+
+Z: exit
+main ENDP
+END main

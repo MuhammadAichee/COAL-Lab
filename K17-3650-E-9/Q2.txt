@@ -1,0 +1,30 @@
+INCLUDE Irvine32.inc
+.data
+A BYTE 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+.code
+MinMaxArray PROC,
+L: DWORD, ADDRESS: DWORD
+MOV ECX, L
+MOV ESI, ADDRESS
+MOV EAX, ESI
+INC ESI
+	L1:
+	CMP EAX,[ESI]
+	JB D
+	JMP B
+	D: MOV EAX,[ESI]
+		JMP B
+	B: INC ESI
+	LOOP L1
+	CALL WRITEDEC
+	CALL CRLF
+ret
+MinMaxArray ENDP
+
+main PROC
+push OFFSET A
+push LENGTHOF A
+Call MinMaxArray
+exit
+main ENDP
+END main

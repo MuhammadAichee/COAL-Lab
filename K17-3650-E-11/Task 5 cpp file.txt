@@ -1,0 +1,25 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+extern "C"
+{
+	void largest();
+	int Input();
+	void print(int);
+}
+void print(int num)
+{
+	cout<<num<<"    ";
+}
+int Input()
+{
+	int number;
+	cout<<"Input number: ";
+	cin>>number;
+	return number;
+}
+int main()
+{
+	largest();
+}
